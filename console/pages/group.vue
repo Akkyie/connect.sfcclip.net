@@ -15,7 +15,9 @@
 
     <v-card>
       <v-list v-if="group.id" subheader>
-        <v-subheader>含まれるユニット（クリックすると削除されます）</v-subheader>
+        <v-subheader
+          >含まれるユニット（クリックすると削除されます）</v-subheader
+        >
         <v-list-item
           v-for="unit in relatedUnits"
           :keys="unit.id"
