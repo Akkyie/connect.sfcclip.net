@@ -11,7 +11,7 @@
     <v-navigation-drawer v-model="drawer" app temporary color="grey lighten-5" light>
       <v-list subheader>
         <v-subheader>ユニット</v-subheader>
-        <v-list-item v-for="unit in units" :key="unit.id">
+        <v-list-item v-for="unit in units" :key="`unit${unit.id}`">
           <v-list-item @click.native.stop="$router.push(`/unit?id=${unit.id}`)">
             <v-list-item-avatar>
               <v-icon>list</v-icon>
@@ -39,7 +39,7 @@
         <v-divider />
 
         <v-subheader>グループ</v-subheader>
-        <v-list-item v-for="group in groups" :key="group.id">
+        <v-list-item v-for="group in groups" :key="`group${group.id}`">
           <v-list-item @click.native.stop="$router.push(`/group?id=${group.id}`)">
             <v-list-item-avatar>
               <v-icon>list</v-icon>
@@ -54,7 +54,7 @@
         </v-list-item>
 
         <v-list-item>
-          <v-list-item avatar @click.native.stop="$router.push('/group')">
+          <v-list-item @click.native.stop="$router.push('/group')">
             <v-list-item-avatar>
               <v-icon>add</v-icon>
             </v-list-item-avatar>
