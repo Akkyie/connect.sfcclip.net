@@ -42,8 +42,8 @@
       disabled
     ></v-text-field>
 
-    <v-btn outline primary @click.native.stop="send">登録</v-btn>
-    <v-btn v-if="unit.id" outline error @click.native.stop="remove">削除</v-btn>
+    <v-btn outlined primary @click.native.stop="send">登録</v-btn>
+    <v-btn v-if="unit.id" outlined error @click.native.stop="remove">削除</v-btn>
   </v-container>
 </template>
 

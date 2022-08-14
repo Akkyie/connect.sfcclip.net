@@ -48,7 +48,7 @@
         <v-flex xs1>
           <v-btn
             v-if="group.id"
-            outline
+            outlined
             secondary
             light
             @click.native.stop="addSelectedUnit"
@@ -58,8 +58,8 @@
       </v-layout>
     </v-container>
 
-    <v-btn outline primary @click.native.stop="send">登録</v-btn>
-    <v-btn v-if="group.id" outline error @click.native.stop="remove"
+    <v-btn outlined primary @click.native.stop="send">登録</v-btn>
+    <v-btn v-if="group.id" outlined error @click.native.stop="remove"
       >削除</v-btn
     >
   </v-container>
