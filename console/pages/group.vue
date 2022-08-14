@@ -19,8 +19,8 @@
           >含まれるユニット（クリックすると削除されます）</v-subheader
         >
         <v-list-item
-          v-for="unit in relatedUnits"
-          :keys="unit.id"
+          v-for="(unit, key) in relatedUnits"
+          :key="key"
           @click.native.stop="removeUnit(unit)"
         >
           <v-list-item-content>

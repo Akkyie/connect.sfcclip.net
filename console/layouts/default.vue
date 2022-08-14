@@ -18,7 +18,7 @@
       <v-list>
         <v-subheader>ユニット</v-subheader>
         <v-list-item-group>
-          <v-list-item v-for="unit in units" :key="`unit${unit.id}`">
+          <v-list-item v-for="(unit, key) in units" :key="key">
             <v-list-item
               @click.native.stop="$router.push(`/unit?id=${unit.id}`)"
             >
@@ -48,7 +48,7 @@
 
         <v-subheader>グループ</v-subheader>
         <v-list-item-group>
-          <v-list-item v-for="group in groups" :key="`group${group.id}`">
+          <v-list-item v-for="(group, key) in groups" :key="key">
             <v-list-item
               @click.native.stop="$router.push(`/group?id=${group.id}`)"
             >
