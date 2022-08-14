@@ -50,7 +50,6 @@
             v-if="group.id"
             outlined
             secondary
-            light
             @click.native.stop="addSelectedUnit"
             >追加</v-btn
           >
@@ -105,6 +104,7 @@ export default {
   methods: {
     addSelectedUnit() {
       if (!this.selectedUnit) return
+      console.log(this.group)
       this.group.addUnit(this.selectedUnit)
       this.selectedUnit = null
     },
@@ -122,24 +122,24 @@ export default {
         .catch((err) => console.error(err))
     },
     send() {
-      if (this.id) {
+      if (this.$route.query.id) {
         api
-          .patch(`/groups/${this.id}`, { data: this.group.data })
-          .then(() => this.reload(this.id))
+          .patch(`/groups/${this.$route.query.id}`, { data: this.group.data })
+          .then(() => this.reload(this.$route.query.id))
           .then(() => this.$emit('update'))
           .catch((err) => console.error(err))
       } else {
         api
           .post(`/groups`, { data: this.group.data })
           .then((res) => new Group(res.data.data))
-          .then((group) => this.$router.push(`/group/${group.id}`))
+          .then((group) => this.$router.push(`/group?id=${group.id}`))
           .then(() => this.$emit('update'))
           .catch((err) => console.error(err))
       }
     },
     remove() {
       api
-        .delete(`/groups/${this.id}`)
+        .delete(`/groups/${this.$route.query.id}`)
         .then(() => this.$router.push(`/group`))
         .then(() => this.$emit('update'))
         .catch((err) => console.error(err))

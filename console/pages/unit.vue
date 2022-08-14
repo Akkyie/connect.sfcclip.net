@@ -83,24 +83,24 @@ export default {
         .catch((err) => console.error(err))
     },
     send() {
-      if (this.id) {
+      if (this.$route.query.id) {
         api
-          .patch(`/units/${this.id}`, { data: this.unit.data })
-          .then(() => this.reload(this.id))
+          .patch(`/units/${this.$route.query.id}`, { data: this.unit.data })
+          .then(() => this.reload(this.$route.query.id))
           .then(() => this.$emit('update'))
           .catch((err) => console.error(err))
       } else {
         api
           .post(`/units`, { data: this.unit.data })
           .then((res) => new Unit(res.data.data))
-          .then((unit) => this.$router.push(`/unit/${unit.id}`))
+          .then((unit) => this.$router.push(`/unit?id=${unit.id}`))
           .then(() => this.$emit('update'))
           .catch((err) => console.error(err))
       }
     },
     remove() {
       api
-        .delete(`/units/${this.id}`)
+        .delete(`/units/${this.$route.query.id}`)
         .then(() => this.$router.push(`/unit`))
         .then(() => this.$emit('update'))
         .catch((err) => console.error(err))
