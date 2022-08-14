@@ -76,7 +76,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/go-xorm/xorm"
+  name = "xorm.io/xorm"
 
 [[constraint]]
   name = "github.com/gorilla/context"

@@ -9,13 +9,13 @@ import (
 	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/akkyie/connect.sfcclip.net/resource"
 	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/manyminds/api2go"
 	"github.com/manyminds/api2go-adapter/gorillamux"
 	log "github.com/sirupsen/logrus"
+	"xorm.io/xorm"
 
 	// allow xorm to use sqlite3 adapter
 	_ "github.com/mattn/go-sqlite3"

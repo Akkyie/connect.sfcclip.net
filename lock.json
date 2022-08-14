@@ -18,7 +18,7 @@
             ]
         },
         {
-            "name": "github.com/go-xorm/xorm",
+            "name": "xorm.io/xorm",
             "version": "v0.6.2",
             "revision": "3c8314e91603f0bfa6a228c1a0fea8a9e298f6d9",
             "packages": [

@@ -27,7 +27,7 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/go-xorm/xorm"
+  name = "xorm.io/xorm"
   packages = ["."]
   revision = "2af18acf7274119e8e542d6bdab1955c80efb447"
 

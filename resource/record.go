@@ -4,8 +4,8 @@ import (
 	"strconv"
 
 	"github.com/akkyie/connect.sfcclip.net/model"
-	"github.com/go-xorm/xorm"
 	"github.com/manyminds/api2go"
+	"xorm.io/xorm"
 )
 
 // RecordResource provides routing for records

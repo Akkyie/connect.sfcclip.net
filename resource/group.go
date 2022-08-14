@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/akkyie/connect.sfcclip.net/model"
-	"github.com/go-xorm/xorm"
 	"github.com/manyminds/api2go"
+	"xorm.io/xorm"
 )
 
 // GroupResource provides routing for groups
