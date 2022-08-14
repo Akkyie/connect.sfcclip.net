@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/akkyie/connect.sfcclip.net/model"
-	"github.com/go-xorm/xorm"
 	"github.com/manyminds/api2go"
+	"xorm.io/xorm"
 )
 
 // UnitResource provides routing for units
@@ -82,7 +82,7 @@ func (r UnitResource) Delete(id string, req api2go.Request) (api2go.Responder, e
 	return &Response{Code: http.StatusNoContent}, nil
 }
 
-//Update stores all changes on the user
+// Update stores all changes on the user
 func (r UnitResource) Update(obj interface{}, req api2go.Request) (api2go.Responder, error) {
 	unit, ok := obj.(model.Unit)
 	if !ok {
