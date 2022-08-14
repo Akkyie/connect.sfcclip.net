@@ -1,6 +1,14 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" temporary light>
+    <v-system-bar color="amber darken-3" app />
+    <v-app-bar dark color="amber accent-4" app>
+      <v-app-bar-nav-icon
+        @click.native.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title v-text="title"></v-toolbar-title>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app temporary color="grey lighten-5" light>
       <v-list subheader>
         <v-subheader>ユニット</v-subheader>
         <v-list-item v-for="unit in units" :key="unit.id">
@@ -86,18 +94,11 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar fixed light>
-      <v-app-bar-nav-icon
-        light
-        @click.native.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-    </v-toolbar>
-    <main>
+    <v-main color="grey lighten-5" light>
       <v-container fluid>
         <Nuxt :units="units" @update="reload" />
       </v-container>
-    </main>
+    </v-main>
   </v-app>
 </template>
 
