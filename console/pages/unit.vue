@@ -76,34 +76,27 @@ export default {
     if (this.$route.query.id) this.reload(this.$route.query.id)
   },
   methods: {
-    reload(id) {
-      api
-        .get(`/units/${id}`)
-        .then((res) => (this.unit = new Unit(res.data.data)))
-        .catch((err) => console.error(err))
+    async reload(id) {
+      const res = await api.get(`/units/${id}`)
+      this.unit = new Unit(res.data.data)
     },
-    send() {
+    async send() {
       if (this.$route.query.id) {
-        api
-          .patch(`/units/${this.$route.query.id}`, { data: this.unit.data })
-          .then(() => this.reload(this.$route.query.id))
-          .then(() => this.$emit('update'))
-          .catch((err) => console.error(err))
+        await api.patch(`/units/${this.$route.query.id}`, {
+          data: this.unit.data,
+        })
+        await this.reload(this.$route.query.id)
       } else {
-        api
-          .post(`/units`, { data: this.unit.data })
-          .then((res) => new Unit(res.data.data))
-          .then((unit) => this.$router.push(`/unit?id=${unit.id}`))
-          .then(() => this.$emit('update'))
-          .catch((err) => console.error(err))
+        const res = await api.post(`/units`, { data: this.unit.data })
+        const unit = await new Unit(res.data.data)
+        await this.$router.push(`/unit?id=${unit.id}`)
       }
+      this.$nuxt.$emit('shouldUpdate')
     },
-    remove() {
-      api
-        .delete(`/units/${this.$route.query.id}`)
-        .then(() => this.$router.push(`/unit`))
-        .then(() => this.$emit('update'))
-        .catch((err) => console.error(err))
+    async remove() {
+      await api.delete(`/units/${this.$route.query.id}`)
+      await this.$router.push(`/unit`)
+      this.$nuxt.$emit('shouldUpdate')
     },
   },
 }

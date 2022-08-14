@@ -24,16 +24,16 @@
           @click.native.stop="removeUnit(unit)"
         >
           <v-list-item-content>
-            <v-list-item-title v-html="unit.id" />
+            <v-list-item-title v-text="unit.id" />
             <v-list-item-subtitle
-              v-html="unit.attributes.name"
+              v-text="unit.attributes.name"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-card>
 
-    <v-container fluid>
+    <v-container fluid class="mt-6">
       <v-layout row wrap>
         <v-flex xs11>
           <v-select
@@ -112,38 +112,30 @@ export default {
     removeUnit(unit) {
       this.group.removeUnit(unit)
     },
-    reload(id) {
-      api
-        .get(`/groups/${id}`)
-        .then((res) => (this.group = new Group(res.data.data)))
-        .catch((err) => console.error(err))
-      api
-        .get('/units')
-        .then((res) => (this.units = Unit.list(res.data) || []))
-        .catch((err) => console.error(err))
+    async reload(id) {
+      const groupRes = await api.get(`/groups/${id}`)
+      this.group = new Group(groupRes.data.data)
+
+      const unitRes = await api.get('/units')
+      this.units = Unit.list(unitRes.data) || []
     },
-    send() {
+    async send() {
       if (this.$route.query.id) {
-        api
-          .patch(`/groups/${this.$route.query.id}`, { data: this.group.data })
-          .then(() => this.reload(this.$route.query.id))
-          .then(() => this.$emit('update'))
-          .catch((err) => console.error(err))
+        await api.patch(`/groups/${this.$route.query.id}`, {
+          data: this.group.data,
+        })
+        await this.reload(this.$route.query.id)
       } else {
-        api
-          .post(`/groups`, { data: this.group.data })
-          .then((res) => new Group(res.data.data))
-          .then((group) => this.$router.push(`/group?id=${group.id}`))
-          .then(() => this.$emit('update'))
-          .catch((err) => console.error(err))
+        const res = await api.post(`/groups`, { data: this.group.data })
+        const group = await new Group(res.data.data)
+        this.$router.push(`/group?id=${group.id}`)
       }
+      this.$nuxt.$emit('shouldUpdate')
     },
-    remove() {
-      api
-        .delete(`/groups/${this.$route.query.id}`)
-        .then(() => this.$router.push(`/group`))
-        .then(() => this.$emit('update'))
-        .catch((err) => console.error(err))
+    async remove() {
+      await api.delete(`/groups/${this.$route.query.id}`)
+      await this.$router.push(`/group`)
+      this.$nuxt.$emit('shouldUpdate')
     },
   },
 }

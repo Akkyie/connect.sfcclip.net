@@ -17,57 +17,53 @@
 </template>
 
 <script>
-import api from "../api"
+import api from '../api'
 
 export default {
   data() {
     return {
       records: [],
       headers: [
-        { text: "ID", value: "id" },
-        { text: "Date and Time", value: "created_at" },
-        { text: "Unit ID", value: "attributes.unit_id", sortable: false },
-        { text: "Access Type", value: "access_type", sortable: false },
-        { text: "Host", value: "attributes.host", sortable: false },
+        { text: 'ID', value: 'id' },
+        { text: 'Date and Time', value: 'created_at' },
+        { text: 'Unit ID', value: 'attributes.unit_id', sortable: false },
+        { text: 'Access Type', value: 'access_type', sortable: false },
+        { text: 'Host', value: 'attributes.host', sortable: false },
         {
-          text: "Remote Address",
-          value: "attributes.remote_addr",
-          sortable: false
+          text: 'Remote Address',
+          value: 'attributes.remote_addr',
+          sortable: false,
         },
         {
-          text: "Request URI",
-          value: "attributes.request_uri",
-          sortable: false
+          text: 'Request URI',
+          value: 'attributes.request_uri',
+          sortable: false,
         },
-        { text: "User Agent", value: "attributes.user_agent", sortable: false },
-        { text: "Referer", value: "attributes.referer", sortable: false }
-      ]
+        { text: 'User Agent', value: 'attributes.user_agent', sortable: false },
+        { text: 'Referer', value: 'attributes.referer', sortable: false },
+      ],
     }
   },
   created() {
     this.reload()
   },
   methods: {
-    reload() {
-      api
-        .get(`/records`)
-        .then((res) => {
-          const records = res.data.data
-          records.map((r) => {
-            r.created_at = r.attributes.created_at
-            switch (r.attributes.access_type) {
-              case 0:
-                r.access_type = "Image"
-                break
-              case 1:
-                r.access_type = "Open"
-                break
-            }
-          })
-          this.records = records
-        })
-        .catch((err) => console.error(err))
-    }
-  }
+    async reload() {
+      const res = await api.get(`/records`)
+      const records = res.data.data
+      records.map((r) => {
+        r.created_at = r.attributes.created_at
+        switch (r.attributes.access_type) {
+          case 0:
+            r.access_type = 'Image'
+            break
+          case 1:
+            r.access_type = 'Open'
+            break
+        }
+      })
+      this.records = records
+    },
+  },
 }
 </script>
