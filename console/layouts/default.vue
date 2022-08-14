@@ -96,7 +96,7 @@
 
     <v-main color="grey lighten-5" light>
       <v-container fluid>
-        <nuxt :units="units" @update="reload" />
+        <nuxt @update="reload" />
       </v-container>
     </v-main>
   </v-app>

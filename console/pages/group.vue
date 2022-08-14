@@ -14,21 +14,20 @@
     />
 
     <v-card>
-      <v-subheader v-if="group.id">含まれるユニット</v-subheader>
-      <v-list v-if="group.id" two-line>
-        <template v-for="unit in relatedUnits" :keys="unit.id">
-          <v-list-item>
-            <v-divider />
-            <v-list-item @click.native.stop="removeUnit(unit)">
-              <v-list-item-content>
-                <v-list-item-title v-html="unit.id" />
-                <v-list-item-subtitle
-                  v-html="unit.attributes.name"
-                ></v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item>
-        </template>
+      <v-list v-if="group.id" subheader>
+        <v-subheader>含まれるユニット（クリックすると削除されます）</v-subheader>
+        <v-list-item
+          v-for="unit in relatedUnits"
+          :keys="unit.id"
+          @click.native.stop="removeUnit(unit)"
+        >
+          <v-list-item-content>
+            <v-list-item-title v-html="unit.id" />
+            <v-list-item-subtitle
+              v-html="unit.attributes.name"
+            ></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-card>
 
@@ -40,8 +39,8 @@
             v-model="selectedUnit"
             :items="unrelatedUnits"
             label="追加"
-            dark
             single-line
+            return-object
             auto
           ></v-select>
         </v-flex>
@@ -80,7 +79,8 @@ export default {
     relatedUnits() {
       return this.group.units
         .map((u) => u.id)
-        .map((id) => this.units.filter((u) => u.id == id)[0])
+        .map((id) => this.units.find((u) => u.id === id))
+        .filter((v) => v)
     },
     unrelatedUnits() {
       const unrelatedUnits = this.units.filter(
@@ -104,7 +104,6 @@ export default {
   methods: {
     addSelectedUnit() {
       if (!this.selectedUnit) return
-      console.log(this.group)
       this.group.addUnit(this.selectedUnit)
       this.selectedUnit = null
     },

@@ -32,7 +32,6 @@ export default class Group {
     const data = this.rawData
     data.type = 'groups'
     data.id = String(this.id)
-    console.log(data)
     return data
   }
 
@@ -48,8 +47,6 @@ export default class Group {
   removeUnit(unit) {
     this.relationships.units.data = this.relationships.units.data.filter(
       (data) => {
-        console.log(data)
-        console.log(unit)
         return new Unit(data).id != unit.id
       }
     )
