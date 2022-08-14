@@ -30,10 +30,11 @@ Built for SFC CLIP.
 # Development
 
 ```sh
+export NODE_OPTIONS=--openssl-legacy-provider
 npm --prefix console install
 npm --prefix console run dev
 
-dep ensure -update
+go get
 go run main.go
 ```
 
@@ -43,10 +44,11 @@ go run main.go
 - `.env`の認証情報を適宜編集
 
 ```sh
+export NODE_OPTIONS=--openssl-legacy-provider
 npm --prefix console install
 npm --prefix console run build
 
-dep ensure -update
-go build -o connect .
+go get
+go build
 ./connect --port=PORT --production=1
 ```

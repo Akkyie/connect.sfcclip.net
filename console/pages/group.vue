@@ -22,9 +22,9 @@
             <v-list-item @click.native.stop="removeUnit(unit)">
               <v-list-item-content>
                 <v-list-item-title v-html="unit.id" />
-                <v-list-item-sub-title
+                <v-list-item-subtitle
                   v-html="unit.attributes.name"
-                ></v-list-item-sub-title>
+                ></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list-item>
@@ -70,10 +70,10 @@ import api from '../api'
 import { Group, Unit } from '../models'
 
 export default {
-  props: ['id', 'units'],
   data() {
     return {
       group: new Group(),
+      units: [],
       selectedUnit: null,
     }
   },
@@ -91,16 +91,16 @@ export default {
     },
   },
   watch: {
-    id(id) {
-      if (id) {
-        this.reload(id)
+    '$route.query'() {
+      if (this.$route.query.id) {
+        this.reload(this.$route.query.id)
       } else {
         this.group = new Group()
       }
     },
   },
-  created() {
-    if (this.id) this.reload(this.id)
+  mounted() {
+    if (this.$route.query.id) this.reload(this.$route.query.id)
   },
   methods: {
     addSelectedUnit() {
@@ -115,6 +115,10 @@ export default {
       api
         .get(`/groups/${id}`)
         .then((res) => (this.group = new Group(res.data.data)))
+        .catch((err) => console.error(err))
+      api
+        .get('/units')
+        .then((res) => (this.units = Unit.list(res.data) || []))
         .catch((err) => console.error(err))
     },
     send() {

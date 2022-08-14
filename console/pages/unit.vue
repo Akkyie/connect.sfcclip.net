@@ -43,7 +43,9 @@
     ></v-text-field>
 
     <v-btn outlined primary @click.native.stop="send">登録</v-btn>
-    <v-btn v-if="unit.id" outlined error @click.native.stop="remove">削除</v-btn>
+    <v-btn v-if="unit.id" outlined error @click.native.stop="remove"
+      >削除</v-btn
+    >
   </v-container>
 </template>
 
@@ -52,7 +54,6 @@ import api from '../api'
 import { Group, Unit } from '../models'
 
 export default {
-  props: ['id'],
   data() {
     return {
       unit: new Unit(),
@@ -63,16 +64,16 @@ export default {
     }
   },
   watch: {
-    id(id) {
-      if (id) {
-        this.reload(id)
+    '$route.query'() {
+      if (this.$route.query.id) {
+        this.reload(this.$route.query.id)
       } else {
         this.unit = new Unit()
       }
     },
   },
-  created() {
-    if (this.id) this.reload(this.id)
+  mounted() {
+    if (this.$route.query.id) this.reload(this.$route.query.id)
   },
   methods: {
     reload(id) {

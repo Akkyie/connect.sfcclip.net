@@ -12,15 +12,15 @@
       <v-list subheader>
         <v-subheader>ユニット</v-subheader>
         <v-list-item v-for="unit in units" :key="unit.id">
-          <v-list-item @click.native.stop="$router.push(`/unit/${unit.id}`)">
+          <v-list-item @click.native.stop="$router.push(`/unit?id=${unit.id}`)">
             <v-list-item-avatar>
               <v-icon>list</v-icon>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="unit.id"></v-list-item-title>
-              <v-list-item-sub-title
+              <v-list-item-subtitle
                 v-html="unit.attributes.name"
-              ></v-list-item-sub-title>
+              ></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list-item>
@@ -40,15 +40,15 @@
 
         <v-subheader>グループ</v-subheader>
         <v-list-item v-for="group in groups" :key="group.id">
-          <v-list-item @click.native.stop="$router.push(`/group/${group.id}`)">
+          <v-list-item @click.native.stop="$router.push(`/group?id=${group.id}`)">
             <v-list-item-avatar>
               <v-icon>list</v-icon>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="group.id"></v-list-item-title>
-              <v-list-item-sub-title
+              <v-list-item-subtitle
                 v-html="group.attributes.name"
-              ></v-list-item-sub-title>
+              ></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list-item>
@@ -96,7 +96,7 @@
 
     <v-main color="grey lighten-5" light>
       <v-container fluid>
-        <Nuxt :units="units" @update="reload" />
+        <nuxt :units="units" @update="reload" />
       </v-container>
     </v-main>
   </v-app>
