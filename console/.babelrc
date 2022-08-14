@@ -1,7 +1,11 @@
 {
+  "plugins": ["@babel/syntax-dynamic-import"],
   "presets": [
-    ["latest", {
-      "es2015": { "modules": false }
-    }]
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
   ]
 }
