@@ -24,13 +24,12 @@ Built for SFC CLIP.
 # Requirements
 
 - go
-- Node.js
+- Node.js v16.14.0
 - MySQL / SQLite3
 
 # Development
 
 ```sh
-export NODE_OPTIONS=--openssl-legacy-provider
 npm --prefix console install
 npm --prefix console run dev
 
@@ -44,7 +43,6 @@ go run main.go
 - `.env`の認証情報を適宜編集
 
 ```sh
-export NODE_OPTIONS=--openssl-legacy-provider
 npm --prefix console install
 npm --prefix console run build
 

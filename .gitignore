@@ -1,5 +1,5 @@
-/.env
-/vendor
-/*.db
+backend/.env
+backend/vendor
+backend/*.db
 /connect
-/debug
+backend/debug
