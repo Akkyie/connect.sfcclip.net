@@ -1,3 +1,3 @@
 [submodule "console"]
 	path = console
-	url = https://github.com/sfcclip/connect-console
+	url = git@github.com:sfcclip/connect-console
