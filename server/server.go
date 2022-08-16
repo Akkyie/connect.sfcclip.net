@@ -62,7 +62,6 @@ func NewServer(production bool) (*Server, error) {
 	orm.SetMapper(core.GonicMapper{})
 
 	router := mux.NewRouter()
-	router.PathPrefix("/console").Handler(http.StripPrefix("/console", http.FileServer(http.Dir("./console"))))
 	router.HandleFunc("/any/{GroupID}", handleAnyUnitInGroupRequest(orm))
 	router.HandleFunc("/img/{UnitID}", handleImageRequest(orm))
 	router.HandleFunc("/open/{UnitID}", handleOpenRequest(orm))
