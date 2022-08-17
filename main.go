@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	"github.com/akkyie/connect.sfcclip.net/server"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/sfcclip/connect/server"
 	log "github.com/sirupsen/logrus"
 )
 

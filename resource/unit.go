@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/manyminds/api2go"
+	"github.com/sfcclip/connect/model"
 	"xorm.io/xorm"
 )
 

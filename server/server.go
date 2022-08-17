@@ -6,14 +6,14 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/akkyie/connect.sfcclip.net/model"
-	"github.com/akkyie/connect.sfcclip.net/resource"
 	"github.com/go-xorm/core"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/manyminds/api2go"
 	"github.com/manyminds/api2go-adapter/gorillamux"
+	"github.com/sfcclip/connect/model"
+	"github.com/sfcclip/connect/resource"
 	log "github.com/sirupsen/logrus"
 	"xorm.io/xorm"
 
