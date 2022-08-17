@@ -18,14 +18,22 @@ func NewRecordResource(orm *xorm.Engine) *RecordResource {
 	return &RecordResource{orm}
 }
 
-// FindAll to satisfy api2go data source interface
-func (r RecordResource) FindAll(req api2go.Request) (api2go.Responder, error) {
+// PaginatedFindAll to satisfy api2go data source interface
+func (r RecordResource) PaginatedFindAll(req api2go.Request) (uint, api2go.Responder, error) {
 	var records []model.Record
-	if err := r.orm.Find(&records); err != nil {
-		return &Response{}, err
+
+	limit, err := strconv.Atoi(req.Pagination["limit"])
+	offset, err := strconv.Atoi(req.Pagination["offset"])
+	count, err := r.orm.Count(model.Record{})
+	if err != nil {
+		return 0, &Response{}, err
 	}
 
-	return &Response{Res: records}, nil
+	if err := r.orm.Limit(limit, offset).Find(&records); err != nil {
+		return 0, &Response{}, err
+	}
+
+	return uint(count), &Response{Res: records}, nil
 }
 
 // FindOne to satisfy `api2go.DataSource` interface
