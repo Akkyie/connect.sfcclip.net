@@ -21,7 +21,6 @@ func NewRecordResource(orm *xorm.Engine) *RecordResource {
 // PaginatedFindAll to satisfy api2go data source interface
 func (r RecordResource) PaginatedFindAll(req api2go.Request) (uint, api2go.Responder, error) {
 	var records []model.Record
-
 	limit, err := strconv.Atoi(req.Pagination["limit"])
 	offset, err := strconv.Atoi(req.Pagination["offset"])
 	count, err := r.orm.Count(model.Record{})
@@ -29,7 +28,7 @@ func (r RecordResource) PaginatedFindAll(req api2go.Request) (uint, api2go.Respo
 		return 0, &Response{}, err
 	}
 
-	if err := r.orm.Limit(limit, offset).Find(&records); err != nil {
+	if err := r.orm.Where("id BETWEEN ? AND ?", offset + 1, offset + limit).OrderBy("id").Find(&records); err != nil {
 		return 0, &Response{}, err
 	}
 
