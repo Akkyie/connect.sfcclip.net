@@ -12,6 +12,7 @@ Built for SFC CLIP.
   - Endpoints:
     - `POST/GET/PATCH/DELETE /api/units`
     - `POST/GET/PATCH/DELETE /api/groups`
+    - `GET /api/records?page[limit]={limit}&page[offset]={offset}`
 - `GET /any/{GroupID}`
   - Return an ID of the fewest accessed unit in the specified group
 - `GET /img/{UnitID}`
